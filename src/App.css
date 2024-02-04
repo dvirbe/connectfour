@@ -1,38 +1,70 @@
 .App {
     text-align: center;
-    background-color: rgba(33, 33, 33, 0.18);
 }
 
+.header {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
 .board {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 150px;
-  height: 70vh;
-  /*margin-bottom: 500px;*/
-  background-color: blue;
-  border-radius: 30px;
+
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: center;
+    overflow: clip;
+    width: fit-content;
+    /*margin-top: 30px;*/
+    background-color: blue;
+    border-radius: 20px;
 }
 
-.disk {
-    width: 100px;
-    height: 100px;
+
+.disk, .diskRed, .diskYellow {
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    display: flex;
+    display: flow;
     background-color: gray;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
 }
-.diskRed {
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+
+.disk:hover{
+    background-color: #444444;
+    transition: background-color 0.5s, color 0.5s;
+/*    */
+/*    width: 75px;*/
+/*    height: 75px;*/
+/*    border-radius: 50%;*/
+/*    display: flex;*/
+/*    background-color: gray;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    cursor: pointer;*/
 }
+/*.diskRed {*/
+/*    width: 75px;*/
+/*    height: 75px;*/
+/*    background-color: red;*/
+/*    border-radius: 50%;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    cursor: pointer;*/
+/*}*/
+/*.diskYellow {*/
+/*    width: 75px;*/
+/*    height: 75px;*/
+/*    background-color: Yellow;*/
+/*    border-radius: 50%;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    cursor: pointer;*/
+/*}*/
 
 
