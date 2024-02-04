@@ -2,10 +2,14 @@
     text-align: center;
 }
 
-.header {
+header {
     text-align: center;
-    font-size: 30px;
-    font-weight: bold;
+    font-size: 50px;
+    /*font-weight: bold;*/
+    background: -webkit-linear-gradient(red,orangered,yellow);
+    -webkit-text-stroke: 1px black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .board {
 
@@ -15,8 +19,8 @@
     justify-content: center;
     overflow: clip;
     width: fit-content;
-    /*margin-top: 30px;*/
-    background-color: blue;
+    border: solid 2px;
+    background:  linear-gradient(dodgerblue ,blue,darkblue,black);
     border-radius: 20px;
 }
 
@@ -24,47 +28,29 @@
 .disk, .diskRed, .diskYellow {
     width: 70px;
     height: 70px;
+    margin: 8px;
     border-radius: 50%;
     display: flow;
-    background-color: gray;
+border: solid 2px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 
 }
-
+.disk{
+    background: radial-gradient(dimgray,gray,darkgray );
+}
 .disk:hover{
     background-color: #444444;
     transition: background-color 0.5s, color 0.5s;
-/*    */
-/*    width: 75px;*/
-/*    height: 75px;*/
-/*    border-radius: 50%;*/
-/*    display: flex;*/
-/*    background-color: gray;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    cursor: pointer;*/
 }
-/*.diskRed {*/
-/*    width: 75px;*/
-/*    height: 75px;*/
-/*    background-color: red;*/
-/*    border-radius: 50%;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    cursor: pointer;*/
-/*}*/
-/*.diskYellow {*/
-/*    width: 75px;*/
-/*    height: 75px;*/
-/*    background-color: Yellow;*/
-/*    border-radius: 50%;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    cursor: pointer;*/
-/*}*/
-
+.header{
+    text-align: center;
+    font-size: 50px;
+    /*font-weight: bold;*/
+    background: -webkit-linear-gradient(red,orangered,yellow);
+    -webkit-text-stroke: 1px black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
