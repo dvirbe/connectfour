@@ -1,6 +1,4 @@
-import React, {useState} from 'react';
-import {render} from "@testing-library/react";
-
+import React from 'react';
 
 function Disk(props) {
 
@@ -12,14 +10,12 @@ function Disk(props) {
         }
     }
 
-
-
     return (
         <>
             <div row={props.row}
                  column={props.columns}
                  onClick={() => props.clicker(props.columns)}
-                 id={props.row + "," + props.columns}
+                 key={props.row + "," + props.columns}
                  className={props.type}
                  style={{backgroundColor: color()}}></div>
         </>

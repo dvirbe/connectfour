@@ -24,9 +24,15 @@ function ColorPicker(props) {
     }
 
     return (<>
-            <div> player {props.player}</div>
+            <div className={"homeScreenText"}>
+                player {props.player} color:
+            </div>
             <div className="color-picker-container">
-                <input type="color" value={color} onChange={handleColorChange}/>
+                <input
+                    type="color"
+                    value={color}
+                    onChange={handleColorChange}
+                />
             </div>
         </>
     );

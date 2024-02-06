@@ -1,8 +1,9 @@
 import './App.css';
 import Board from "./Components/Board";
 import ColorPicker from "./Components/ColorPicker";
-import React, {useState} from "react";
-import colorPicker from "./Components/ColorPicker";
+import React from "react";
+import NumberInput from "./Components/NumberInput";
+
 
 class App extends React.Component {
     state = {
@@ -17,15 +18,18 @@ class App extends React.Component {
 
     }
 
+
+    changeWin = () => {
+        this.setState({someoneWin: !this.state.someoneWin});
+    }
+
     changeTurn() {
         this.setState({isPlayerOneTurn: !this.state.isPlayerOneTurn});
     }
 
-
     startGame() {
         this.setState({gameInProgress: !this.state.gameInProgress});
     }
-
 
     setColor = (newColor) => {
         this.setState({player1_Color: newColor})
@@ -33,10 +37,10 @@ class App extends React.Component {
     setColor2 = (newColor) => {
         this.setState({player2_Color: newColor})
     }
-
     handleRowInput = (event) => {
         this.setState({rows: event.target.value})
     }
+
     handleColumnInput = (event) => {
         this.setState({columns: event.target.value})
     }
@@ -48,12 +52,9 @@ class App extends React.Component {
                         <div> connect four</div>
                     </header>
 
-
                     {this.state.gameInProgress ? (
 
-
                         <div>
-
                             <Board isPlayerOneTurn={this.state.isPlayerOneTurn}
                                    changePlayerTurn={() => {
                                        this.changeTurn()
@@ -64,24 +65,38 @@ class App extends React.Component {
                         </div>
                     ) : (
                         <div>
-                            <ColorPicker setColor={this.setColor} player={1}/>
-                            <ColorPicker setColor={this.setColor2} player={2}/>
+                            <ColorPicker
+                                setColor={this.setColor}
+                                player={1}
+                            />
 
-                            <div className="input">
-                                <input type="number"
-                                       value={this.state.rows}
-                                       min={1}
-                                       onInputCapture={this.handleRowInput}/>
-                            </div>
-                            <div className="input">
-                                <input type="number"
-                                       value={this.state.columns}
-                                       onInputCapture={this.handleColumnInput}/>
-                            </div>
+                            <ColorPicker
+                                setColor={this.setColor2}
+                                player={2}
+                            />
+
+                            <NumberInput
+                                defaultValue={this.state.rows}
+                                min={4}
+                                max={20}
+                                handleInput={this.handleRowInput}
+                                step = {1}
+                                text={"number of rows:"}
+                            />
+
+                            <NumberInput
+                                defaultValue={this.state.columns}
+                                min={4}
+                                max={20}
+                                step = {1}
+                                handleInput={this.handleColumnInput}
+                                text={"number of columns:"}
+                            />
 
                             {<button onClick={() => {
                                 this.startGame()
-                            }}>start game</button>}
+                            }}>start game
+                            </button>}
                         </div>
                     )}
                 </div>
