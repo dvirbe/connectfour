@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+
 }
 
 html {
@@ -8,8 +9,7 @@ html {
 
 header {
     text-align: center;
-    font-size: 50px;
-    /*font-weight: bold;*/
+    font-size: 7vh;
     background: -webkit-linear-gradient(red, orangered, yellow);
     -webkit-text-stroke: 1px black;
     -webkit-background-clip: text;
@@ -31,9 +31,7 @@ header {
 
 
 .disk, .diskRed, .diskYellow {
-    width: 70px;
-    height: 70px;
-    margin: 8px;
+    margin: 1px;
     border-radius: 50%;
     display: flow;
     border: solid 2px;
@@ -63,15 +61,6 @@ header {
 
 .numberInput {
     margin: 15px;
-
-    border-radius: 5px; /* Optional: Add rounded corners */
-    /*border: 5px solid #ff6347; !* Set the color of the margin *!*/
-
-}
-
-.homeScreenText {
-    font-size: 16px;
-    color: #ffffff;
 }
 
 button {
@@ -81,17 +70,41 @@ button {
     color: #fff;
     font-weight: 600;
     border-radius: 5px;
+
+}
+
+.gameScreenText {
+    font-size: 5vh;
+    display: inline-block;
+    background-color: purple;
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid #4231F5B5;
 }
 
 .homeScreenText {
     display: inline-block;
-    background-color: purple; /* Set the background color of the rectangle */
-    padding: 10px; /* Adjust the padding as needed */
-    border-radius: 5px; /* Optional: Add rounded corners */
-    border: 5px solid rgba(66, 49, 245, 0.71); /* Set the color of the margin */
+    background-color: purple;
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid #4231F5B5;
 
 }
-.color-picker-container{
-margin: 15px;
+
+.color-picker-container {
+    margin: 15px;
+}
+
+.win {
+
+    font-size: 100px;
+    -webkit-text-stroke: 2px black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #1d1d56;
+    background: transparent;
+    width: 99vw;
+    height: 80vh;
+    position: absolute;
+    text-align: center;
 
 }

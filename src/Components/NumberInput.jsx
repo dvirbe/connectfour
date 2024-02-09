@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 function NumberInput(props) {
 
@@ -9,10 +9,13 @@ function NumberInput(props) {
             </div>
             <div className="numberInput">
                 <input type="number"
-                       defaultValue={props.defaultValue}
+                       value={props.value}
                        min={props.min}
                        max={props.max}
-                       onInputCapture={props.handleInput}/>
+                       onChange={(event => {
+                           props.handleInput(event, props.type)
+                       })}
+                />
             </div>
         </>
 
