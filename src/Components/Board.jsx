@@ -26,9 +26,9 @@ function Board(props) {
             for (let y = 0; y < numberOfRows; y++) {
                 if (props.boardLayout[x][y] === 1 || props.boardLayout[x][y] === 2) {
                     if (
-                        x + (xOffset * 3) <= numberOfRows &&
+                        x + (xOffset * 3) < numberOfColumns &&
                         x + (xOffset * 3) >= 0 &&
-                        y + (yOffset * 3) <= numberOfColumns &&
+                        y + (yOffset * 3) < numberOfRows &&
                         y + (yOffset * 3) >= 0
                     ) {
                         if (props.boardLayout[x][y] === props.boardLayout[x + xOffset][y + yOffset]) {
@@ -45,31 +45,30 @@ function Board(props) {
         return 0;
     }
 
-    function declareWinner(winner) {
-        // alert(winner + "winner")
+    function changeWin(winner) {
         props.changeWin(winner)
     }
 
     function checkWin() {
-        let temp = fourInARowChecker(1, 0)
-        if (temp !== 0) {
-            declareWinner(temp)
-            return temp
+        let winner = fourInARowChecker(1, 0)
+        if (winner !== 0) {
+            changeWin(winner)
+            return winner
         }
-        temp = fourInARowChecker(0, -1)
-        if (temp !== 0) {
-            declareWinner(temp)
-            return temp
+        winner = fourInARowChecker(0, -1)
+        if (winner !== 0) {
+            changeWin(winner)
+            return winner
         }
-        temp = fourInARowChecker(1, 1)
-        if (temp !== 0) {
-            declareWinner(temp)
-            return temp
+        winner = fourInARowChecker(1, 1)
+        if (winner !== 0) {
+            changeWin(winner)
+            return winner
         }
-        temp = fourInARowChecker(1, -1)
-        if (temp !== 0) {
-            declareWinner(temp)
-            return temp
+        winner = fourInARowChecker(1, -1)
+        if (winner !== 0) {
+            changeWin(winner)
+            return winner
         }
 
         return 0;
