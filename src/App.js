@@ -72,17 +72,17 @@ class App extends React.Component {
         if (!match) {
             return null;
         }
-        const r = parseInt(match[1], 16);
-        const g = parseInt(match[2], 16);
-        const b = parseInt(match[3], 16);
+        const r = parseInt(match[finals.RED], finals.HEXADECIMAL);
+        const g = parseInt(match[finals.GREEN], finals.HEXADECIMAL);
+        const b = parseInt(match[finals.BLUE], finals.HEXADECIMAL);
         return [r, b, g];
     }
 
     colorAreEqual = () => {
-        const one = this.hexToRgb(this.state.colors[0])
-        const two = this.hexToRgb(this.state.colors[1])
-        const difference = 75
-        return Math.abs(one[0] - two[0]) <= difference && Math.abs(one[1] - two[1]) <= difference && Math.abs(one[2] - two[2]) <= difference
+        const one = this.hexToRgb(this.state.colors[finals.PLAYER_ONE_INDEX])
+        const two = this.hexToRgb(this.state.colors[finals.PLAYER_TWO_INDEX])
+        const difference = finals.SHADE_DIFFERENCE
+        return Math.abs(one[finals.RED_INDEX] - two[finals.RED_INDEX]) <= difference && Math.abs(one[finals.GREEN_INDEX] - two[finals.GREEN_INDEX]) <= difference && Math.abs(one[finals.BLUE_INDEX] - two[finals.BLUE_INDEX]) <= difference
     }
 
     handleBoardSizeInput = (event, field) => {
