@@ -4,7 +4,7 @@ import * as finals from "../Constants.js";
 function Disk(props) {
 
     const size = () => {
-        return ((65 /props.rowCount) > (95 /props.columnCount)) ? (95 /props.columnCount) : (65 /props.rowCount)
+        return ((64 /props.rowCount) > (100 /props.columnCount)) ? (100 /props.columnCount) : (64 /props.rowCount)
     }
     const color = () => {
         if (props.type === "diskRed") {

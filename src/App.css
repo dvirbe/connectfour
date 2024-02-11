@@ -47,7 +47,7 @@ header {
 }
 
 .boardRow:has(.disk:hover, .diskYellow:hover, .diskRed:hover) {
-    .disk{
+    .disk {
         border: solid 3px #ffffff;
     }
 }
@@ -63,9 +63,18 @@ header {
 
 .numberInput {
     margin: 15px;
+    input{
+        font-size:24px;
+    }
+
+        padding-block:8px;
+        padding-inline:15px;
+
+
 }
 
 button {
+    font-size:30px;
     padding: 10px;
     border: none;
     background-color: #3F51B5;
@@ -74,7 +83,7 @@ button {
     border-radius: 5px;
 }
 
-.timer{
+.timer {
     background: #6782e1;
     position: absolute;
     top: 30px;
@@ -82,11 +91,11 @@ button {
     border: solid 4px #ad2c41;
     border-radius: 5px;
     padding: 10px;
-    font-size: 5vh ;
+    font-size: 5vh;
 }
 
 .gameScreenText {
-    font-size: 5vh;
+    font-size: 3vh;
     display: inline-block;
     margin: 5px;
     background-color: #6782e1;
@@ -108,23 +117,22 @@ button {
 
 .color-picker-container {
     margin: 15px;
+}
 
+input[type="color"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    overflow: clip  ;
+    inline-size:60px;
+    block-size: 60px;
+    border: none;
+    outline: none;
+    padding: 0;
 }
-.color-picker-container input[type="color"]::-{
-    inline-size: 80px;
-    padding: 25px 25px;
 
-}
-.color-picker-container input[type="color"]::-webkit-color-swatch-wrapper {
-    width: 50px; /* Adjust width as needed */
-    height: 5px;
-    color: black;
 
-}
-.color-picker input[type="color"]::-moz-color-swatch {
-    width: 40px; /* Adjust width as needed */
-    height: 40px;
-}
 
 .win {
     display: flex;
