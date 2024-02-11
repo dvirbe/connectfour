@@ -4,7 +4,6 @@ import ColorPicker from "./Components/ColorPicker";
 import React from "react";
 import NumberInput from "./Components/NumberInput";
 
-
 class App extends React.Component {
 
     state = {
@@ -16,7 +15,24 @@ class App extends React.Component {
         rows: 6,
         columns: 7,
         winner: 0,
+        time: 10
     }
+
+
+    timer() {
+        setInterval(() => {
+            this.setState({time: this.state.time - 1})
+        }, 1000, this.state.gameInProgress)
+    }
+
+    timeOut() {
+        setInterval(() => {
+            if (this.state.time <= 0) {
+                this.changeTurn()
+            }
+        }, 1000, this.state.gameInProgress)
+    }
+
 
     changeWin = (winner) => {
         this.setState({someoneWin: winner});
@@ -24,11 +40,16 @@ class App extends React.Component {
 
     changeTurn() {
         this.setState({isPlayerOneTurn: !this.state.isPlayerOneTurn});
+        this.setState({time: 10});
     }
 
     startGame() {
         this.setState({gameInProgress: !this.state.gameInProgress});
+        this.timer()
+        this.timeOut()
+
     }
+
 
     changeBoardLayout = (newLayout) => {
         this.setState({boardLayout: newLayout})
@@ -63,7 +84,7 @@ class App extends React.Component {
     colorAreEqual = () => {
         const one = this.hexToRgb(this.state.colors[0])
         const two = this.hexToRgb(this.state.colors[1])
-        const difference =75
+        const difference = 75
         return Math.abs(one[0] - two[0]) <= difference && Math.abs(one[1] - two[1]) <= difference && Math.abs(one[2] - two[2]) <= difference
     }
 
@@ -83,6 +104,59 @@ class App extends React.Component {
 
     }
 
+    restartGame = () => {
+        this.makeTable()
+        this.setState({someoneWin: 0})
+        this.setState({isPlayerOneTurn: true})
+        this.setState({time: 10})
+    }
+
+    winOrDrawTextChanger = () => {
+        let text
+        if (this.state.someoneWin !== 0) {
+            if (this.state.someoneWin === 999) {
+                text = "Draw"
+            } else if (this.state.someoneWin === 1 || this.state.someoneWin === 2) {
+                text = ("Player " + this.state.someoneWin + " Won")
+            }
+            return (
+                <>
+                    <div className={"win "}>
+                        {text}
+
+                    </div>
+                    <button className={"restartButton"}
+                            onClick={this.restartGame}>
+                        Restart Game
+                    </button>
+                </>
+            )
+        }
+    }
+
+    colorPicker(number) {
+        return (
+            <ColorPicker
+                setColor={this.setColor}
+                index={number}
+                color={this.state.colors[number]}
+            />
+        )
+    }
+
+    numberLimitation(props, type) {
+        return (
+            <NumberInput
+                type={type}
+                value={props}
+                min={4}
+                max={20}
+                handleInput={this.handleBoardSizeInput}
+                step={1}
+                text={"number of " + type + ":"}
+            />)
+    }
+
     render() {
         document.title = "Connect Four"
         return (<>
@@ -96,11 +170,10 @@ class App extends React.Component {
                             <div
                                 className={"gameScreenText"}>{this.state.isPlayerOneTurn ? ("player 1") : "player 2"} turn
                             </div>
-                            {this.state.someoneWin !== 0 ? (
-                                <div className={"win"}>
-                                    {this.state.someoneWin !== 0 && ("Player " + this.state.someoneWin + " Won")}
-                                </div>
-                            ) : ""}
+                            <div
+                                className={"timer"}>{this.state.time} second left
+                            </div>
+                            {this.winOrDrawTextChanger()}
 
 
                             <Board
@@ -118,39 +191,13 @@ class App extends React.Component {
                         </div>
                     ) : (
                         <div>
-                            <ColorPicker
-                                setColor={this.setColor}
-                                index={0}
-                                color={this.state.colors[0]}
-                            />
+                            {this.colorPicker(0)}
 
-                            <ColorPicker
-                                setColor={this.setColor}
-                                index={1}
-                                color={this.state.colors[1]}
-                            />
+                            {this.colorPicker(1)}
 
-                            <NumberInput
-                                type={"rows"}
-                                defaultValue={this.state.rows}
-                                value={this.state.rows}
-                                min={4}
-                                max={20}
-                                handleInput={this.handleBoardSizeInput}
-                                step={1}
-                                text={"number of rows:"}
-                            />
+                            {this.numberLimitation(this.state.rows, "rows")}
 
-                            <NumberInput
-                                type={"columns"}
-                                defaultValue={this.state.columns}
-                                value={this.state.columns}
-                                min={4}
-                                max={20}
-                                step={1}
-                                handleInput={this.handleBoardSizeInput}
-                                text={"number of columns:"}
-                            />
+                            {this.numberLimitation(this.state.columns, "columns")}
 
                             {this.colorAreEqual() ? (
                                 <div className={"homeScreenText"}>both players color cannot be the same, please change

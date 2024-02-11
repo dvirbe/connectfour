@@ -45,6 +45,18 @@ function Board(props) {
         return 0;
     }
 
+    function tie() {
+        for (let i = 0; i < numberOfColumns; i++) {
+            for (let j = 0; j < numberOfRows; j++) {
+                if (props.boardLayout[i][j]===0) {
+                    return false;
+                }
+            }
+        }
+        return true
+    }
+
+
     function changeWin(winner) {
         props.changeWin(winner)
     }
@@ -70,12 +82,15 @@ function Board(props) {
             changeWin(winner)
             return winner
         }
-
+        if (tie()) {
+            changeWin(999)
+            return 999;
+        }
         return 0;
     }
 
     const drawBoard = props.boardLayout.map((columns, columnIndex) =>
-        <div key={columnIndex}>
+        <div key={columnIndex} className={"boardRow"}>
             {columns.map((rows, rowIndex) =>
                 <Disk color={props.color}
                       key={rowIndex}

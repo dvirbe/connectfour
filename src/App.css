@@ -34,20 +34,22 @@ header {
     margin: 1px;
     border-radius: 50%;
     display: flow;
-    border: solid 2px;
+    border: solid 3px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 
 }
 
+
 .disk {
     background: radial-gradient(dimgray, gray, darkgray);
 }
 
-.disk:hover {
-    background: radial-gradient(darkgray, black);
-    transition: background-color 0.5s, color 0.5s;
+.boardRow:has(.disk:hover) {
+    .disk{
+        border: solid 3px #ffffff;
+    }
 }
 
 .header {
@@ -70,24 +72,37 @@ button {
     color: #fff;
     font-weight: 600;
     border-radius: 5px;
+}
 
+.timer{
+    background: #6782e1;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    border: solid 4px #ad2c41;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 5vh ;
 }
 
 .gameScreenText {
     font-size: 5vh;
     display: inline-block;
-    background-color: purple;
+    margin: 5px;
+    background-color: #6782e1;
     padding: 10px;
     border-radius: 5px;
-    border: 3px solid #4231F5B5;
+    border: 4px solid #ad2c41;
 }
 
 .homeScreenText {
+    font-size: 3vh;
     display: inline-block;
-    background-color: purple;
+    margin: 5px;
+    background-color: #6782e1;
     padding: 10px;
     border-radius: 5px;
-    border: 3px solid #4231F5B5;
+    border: 4px solid #ad2c41;
 
 }
 
@@ -96,15 +111,15 @@ button {
 }
 
 .win {
-
+    display: flex;
     font-size: 100px;
     -webkit-text-stroke: 2px black;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: #1d1d56;
+    -webkit-text-fill-color: #ffffff;
     background: transparent;
-    width: 99vw;
-    height: 80vh;
+    width: 95vw;
+    height: 79vh;
     position: absolute;
     text-align: center;
-
+    justify-content: center;
 }
