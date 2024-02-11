@@ -1,17 +1,17 @@
 import React from "react";
 import Disk from "./Disk";
-
+import * as finals from "../Constants.js";
 function Board(props) {
 
     const numberOfColumns = Number(props.columns);
     const numberOfRows = Number(props.rows);
 
-    function handleDiskPlacementInColumn(column) {
+    function handleDiskClick(column) {
         let tempBoard = props.boardLayout
-        for (let i = numberOfRows - 1; i >= 0; i--) {
-            if (props.boardLayout[column - 1][i] === 0) {
-                props.isPlayerOneTurn ? tempBoard[column - 1][i] = 1 :
-                    tempBoard[column - 1][i] = 2;
+        for (let i = numberOfRows -1; i >= 0; i--) {
+            if (props.boardLayout[column ][i] === finals.EMPTY_DISK) {
+                props.isPlayerOneTurn ? tempBoard[column][i] = finals.PLAYER_ONE :
+                    tempBoard[column][i] = finals.PLAYER_TWO;
                 props.changeBoardLayout(tempBoard);
                 checkWin()
                 props.changePlayerTurn();
@@ -21,10 +21,9 @@ function Board(props) {
     }
 
     function fourInARowChecker(xOffset, yOffset) {
-
         for (let x = 0; x < numberOfColumns; x++) {
             for (let y = 0; y < numberOfRows; y++) {
-                if (props.boardLayout[x][y] === 1 || props.boardLayout[x][y] === 2) {
+                if (props.boardLayout[x][y] === finals.PLAYER_ONE || props.boardLayout[x][y] === finals.PLAYER_TWO) {
                     if (
                         x + (xOffset * 3) < numberOfColumns &&
                         x + (xOffset * 3) >= 0 &&
@@ -45,10 +44,10 @@ function Board(props) {
         return 0;
     }
 
-    function tie() {
+    function tieChecker() {
         for (let i = 0; i < numberOfColumns; i++) {
             for (let j = 0; j < numberOfRows; j++) {
-                if (props.boardLayout[i][j]===0) {
+                if (props.boardLayout[i][j]=== finals.EMPTY_DISK) {
                     return false;
                 }
             }
@@ -63,28 +62,28 @@ function Board(props) {
 
     function checkWin() {
         let winner = fourInARowChecker(1, 0)
-        if (winner !== 0) {
+        if (winner !== finals.DEFAULT_WIN_SITUATION) {
             changeWin(winner)
-            return winner
+            return
         }
         winner = fourInARowChecker(0, -1)
-        if (winner !== 0) {
+        if (winner !== finals.DEFAULT_WIN_SITUATION) {
             changeWin(winner)
-            return winner
+            return
         }
         winner = fourInARowChecker(1, 1)
-        if (winner !== 0) {
+        if (winner !== finals.DEFAULT_WIN_SITUATION) {
             changeWin(winner)
-            return winner
+            return
         }
         winner = fourInARowChecker(1, -1)
-        if (winner !== 0) {
+        if (winner !== finals.DEFAULT_WIN_SITUATION) {
             changeWin(winner)
-            return winner
+            return
         }
-        if (tie()) {
-            changeWin(999)
-            return 999;
+        if (tieChecker()) {
+            changeWin(finals.DRAW)
+            return
         }
         return 0;
     }
@@ -94,9 +93,9 @@ function Board(props) {
             {columns.map((rows, rowIndex) =>
                 <Disk color={props.color}
                       key={rowIndex}
-                      row={rowIndex + 1}
-                      columns={columnIndex + 1}
-                      clicker={handleDiskPlacementInColumn}
+                      row={rowIndex}
+                      columns={columnIndex }
+                      clicker={handleDiskClick}
                       type={diskType(rows)}
                       rowCount={numberOfRows}
                       columnCount={numberOfColumns}
@@ -107,9 +106,9 @@ function Board(props) {
 
     function diskType(number) {
         let type = "disk"
-        if (number === 1) {
+        if (number === finals.PLAYER_ONE) {
             type = type.concat("Red")
-        } else if (number === 2) {
+        } else if (number === finals.PLAYER_TWO) {
             type = type.concat("Yellow")
         }
         return type

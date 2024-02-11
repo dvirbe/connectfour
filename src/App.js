@@ -3,34 +3,33 @@ import Board from "./Components/Board";
 import ColorPicker from "./Components/ColorPicker";
 import React from "react";
 import NumberInput from "./Components/NumberInput";
+import * as finals from "./Constants";
 
 class App extends React.Component {
 
     state = {
         boardLayout: [],
-        gameInProgress: false,
-        isPlayerOneTurn: true,
-        colors: ["#f60000", "#e3ff00"],
-        someoneWin: 0,
-        rows: 6,
-        columns: 7,
-        winner: 0,
-        time: 10
+        gameInProgress: finals.DEFAULT_GAME_PROGRESS,
+        isPlayerOneTurn: finals.DEFAULT_IS_PLAYER_ONE_TURN,
+        colors: [finals.DEFAULT_PLAYER_ONE_COLOR, finals.DEFAULT_PLAYER_TWO_COLOR],
+        someoneWin: finals.DEFAULT_WIN_SITUATION,
+        rows: finals.DEFAULT_ROWS_AMOUNT,
+        columns: finals.DEFAULT_COLUMNS_AMOUNT,
+        time: finals.TIME_PER_TURN
     }
-
 
     timer() {
         setInterval(() => {
             this.setState({time: this.state.time - 1})
-        }, 1000, this.state.gameInProgress)
+        }, finals.SECOND, this.state.gameInProgress)
     }
 
     timeOut() {
         setInterval(() => {
-            if (this.state.time <= 0) {
+            if (this.state.time <= finals.TIME_UP) {
                 this.changeTurn()
             }
-        }, 1000, this.state.gameInProgress)
+        }, finals.SECOND, this.state.gameInProgress)
     }
 
 
@@ -40,16 +39,14 @@ class App extends React.Component {
 
     changeTurn() {
         this.setState({isPlayerOneTurn: !this.state.isPlayerOneTurn});
-        this.setState({time: 10});
+        this.setState({time: finals.TIME_PER_TURN});
     }
 
     startGame() {
         this.setState({gameInProgress: !this.state.gameInProgress});
         this.timer()
         this.timeOut()
-
     }
-
 
     changeBoardLayout = (newLayout) => {
         this.setState({boardLayout: newLayout})
@@ -64,7 +61,7 @@ class App extends React.Component {
     makeTable = () => {
         const temp = []
         for (let i = 0; i < Number(this.state.columns); i++) {
-            const innerArray = new Array(Number(this.state.rows)).fill(0);
+            const innerArray = new Array(Number(this.state.rows)).fill(finals.EMPTY_DISK);
             temp.push(innerArray);
         }
         this.changeBoardLayout(temp)
@@ -90,11 +87,11 @@ class App extends React.Component {
 
     handleBoardSizeInput = (event, field) => {
         let temp = event.target.value
-        if (event.target.value > 20) {
-            temp = 20
+        if (event.target.value > finals.MAX_SIZE_INPUT) {
+            temp = finals.MAX_SIZE_INPUT
         }
-        if (event.target.value < 4) {
-            temp = 4
+        if (event.target.value < finals.MIN_SIZE_INPUT) {
+            temp = finals.MIN_SIZE_INPUT
         }
         if (field === "rows") {
             this.setState({rows: temp})
@@ -106,24 +103,23 @@ class App extends React.Component {
 
     restartGame = () => {
         this.makeTable()
-        this.setState({someoneWin: 0})
-        this.setState({isPlayerOneTurn: true})
-        this.setState({time: 10})
+        this.setState({someoneWin: finals.DEFAULT_WIN_SITUATION})
+        this.setState({isPlayerOneTurn: finals.DEFAULT_IS_PLAYER_ONE_TURN})
+        this.setState({time: finals.TIME_PER_TURN})
     }
 
-    winOrDrawTextChanger = () => {
+    gameOverText = () => {
         let text
-        if (this.state.someoneWin !== 0) {
-            if (this.state.someoneWin === 999) {
+        if (this.state.someoneWin !== finals.EMPTY_DISK) {
+            if (this.state.someoneWin === finals.DRAW) {
                 text = "Draw"
-            } else if (this.state.someoneWin === 1 || this.state.someoneWin === 2) {
+            } else if (this.state.someoneWin === finals.PLAYER_ONE || this.state.someoneWin === finals.PLAYER_TWO) {
                 text = ("Player " + this.state.someoneWin + " Won")
             }
             return (
                 <>
-                    <div className={"win "}>
+                    <div className={"win"}>
                         {text}
-
                     </div>
                     <button className={"restartButton"}
                             onClick={this.restartGame}>
@@ -134,25 +130,24 @@ class App extends React.Component {
         }
     }
 
-    colorPicker(number) {
+    colorPicker(index) {
         return (
             <ColorPicker
                 setColor={this.setColor}
-                index={number}
-                color={this.state.colors[number]}
+                index={index}
+                color={this.state.colors[index]}
             />
         )
     }
 
-    numberLimitation(props, type) {
+    numberLimitation(value, type) {
         return (
             <NumberInput
                 type={type}
-                value={props}
-                min={4}
-                max={20}
+                value={value}
+                min={finals.MIN_SIZE_INPUT}
+                max={finals.MAX_SIZE_INPUT}
                 handleInput={this.handleBoardSizeInput}
-                step={1}
                 text={"number of " + type + ":"}
             />)
     }
@@ -173,7 +168,7 @@ class App extends React.Component {
                             <div
                                 className={"timer"}>{this.state.time} second left
                             </div>
-                            {this.winOrDrawTextChanger()}
+                            {this.gameOverText()}
 
 
                             <Board
@@ -191,9 +186,9 @@ class App extends React.Component {
                         </div>
                     ) : (
                         <div>
-                            {this.colorPicker(0)}
+                            {this.colorPicker(finals.PLAYER_ONE_INDEX)}
 
-                            {this.colorPicker(1)}
+                            {this.colorPicker(finals.PLAYER_TWO_INDEX)}
 
                             {this.numberLimitation(this.state.rows, "rows")}
 

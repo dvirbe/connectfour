@@ -46,7 +46,7 @@ header {
     background: radial-gradient(dimgray, gray, darkgray);
 }
 
-.boardRow:has(.disk:hover) {
+.boardRow:has(.disk:hover, .diskYellow:hover, .diskRed:hover) {
     .disk{
         border: solid 3px #ffffff;
     }
@@ -108,6 +108,22 @@ button {
 
 .color-picker-container {
     margin: 15px;
+
+}
+.color-picker-container input[type="color"]::-{
+    inline-size: 80px;
+    padding: 25px 25px;
+
+}
+.color-picker-container input[type="color"]::-webkit-color-swatch-wrapper {
+    width: 50px; /* Adjust width as needed */
+    height: 5px;
+    color: black;
+
+}
+.color-picker input[type="color"]::-moz-color-swatch {
+    width: 40px; /* Adjust width as needed */
+    height: 40px;
 }
 
 .win {
