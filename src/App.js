@@ -21,7 +21,7 @@ class App extends React.Component {
     timer() {
         setInterval(() => {
             this.setState({time: this.state.time - 1})
-        }, finals.SECOND, this.state.gameInProgress)
+        }, finals.SECOND)
     }
 
     timeOut() {
@@ -29,9 +29,8 @@ class App extends React.Component {
             if (this.state.time <= finals.TIME_UP) {
                 this.changeTurn()
             }
-        }, finals.SECOND, this.state.gameInProgress)
+        }, finals.SECOND)
     }
-
 
     changeWin = (winner) => {
         this.setState({someoneWin: winner});
@@ -56,7 +55,6 @@ class App extends React.Component {
         let temp = this.state.colors
         temp[index] = newColor
         this.setState({colors: temp})
-
     }
     makeTable = () => {
         const temp = []
@@ -98,7 +96,6 @@ class App extends React.Component {
         } else if (field === "columns") {
             this.setState({columns: temp})
         }
-
     }
 
     restartGame = () => {
@@ -206,14 +203,24 @@ class App extends React.Component {
                                         }}>start game
                                 </button>
                             )}
+                            <div>
+                                < div
+                                    className="instructions">
+                                    <button className={"xButton"} onClick={() => {
+                                        let element = document.getElementsByClassName("instructions")[0]
+                                        element.remove()
+                                    }}>X
+                                    </button>
+                                    {finals.INSTRUCTIONS_STRING}
+                                </div>
+                            </div>
+
                         </div>
                     )}
                 </div>
-
             </>
         )
     }
-
 }
 
 export default App;

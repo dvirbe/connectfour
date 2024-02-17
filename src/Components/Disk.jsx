@@ -7,6 +7,7 @@ function Disk(props) {
         return ((64 /props.rowCount) > (100 /props.columnCount)) ? (100 /props.columnCount) : (64 /props.rowCount)
     }
     const color = () => {
+
         if (props.type === "diskRed") {
             return props.color[finals.PLAYER_ONE_INDEX]
         } else if (props.type === "diskYellow") {

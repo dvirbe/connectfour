@@ -20,6 +20,7 @@ function Board(props) {
         }
     }
 
+
     function fourInARowChecker(xOffset, yOffset) {
         for (let x = 0; x < numberOfColumns; x++) {
             for (let y = 0; y < numberOfRows; y++) {

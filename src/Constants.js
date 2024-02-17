@@ -24,3 +24,4 @@ export const HEXADECIMAL = 16;
 export const SHADE_DIFFERENCE = 75;
 export const PLAYER_ONE_INDEX = 0;
 export const PLAYER_TWO_INDEX = 1;
+export const INSTRUCTIONS_STRING = <>how to play:<br/>your goal is to get 4 disks in a row (horizontal, vertical, or diagonal) before your opponent.<br/>each player has 10 second to place his disk or he loss his turn to his opponent.<br/>each player can choose his disk color but the color can not be the same as your opponent.<br/>the board can be customized between 4-20 rows and columns.</>
